@@ -1,3 +1,4 @@
 console.log('Loaded!');
-var element=document.getElementById('main');
+var element=document.getElementById('main'
+);
 element.innerHTMl='new';
