@@ -4,7 +4,8 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-var articleone={
+var articles={
+'article-one':{
     heading:"article one",
     title:"article-one",
     date:"sept 5",
@@ -14,7 +15,28 @@ var articleone={
             <p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes </p>
             
     `
-};
+            },
+'article-two':{
+    heading:"article two",
+    title:"article-two",
+    date:"sept 6",
+    content:`<p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes 
+            </p>
+            <p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes </p>
+            <p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes </p>`
+            
+},
+'article-three':{
+    heading:"article one",
+    title:"article-one",
+    date:"sept 5",
+    content:`<p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes 
+            </p>
+            <p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes </p>
+            <p>A paragraph is a group of words put together to form a group that is usually longer than a sentence. Paragraphs are often made up of many sentences. They are usually between four to eight sentences. Paragraphs can begin with an indentation (about five spaces), or by missing a line out, and then starting again; this makes </p>
+            `
+}
+            };
 function createtemplate(data){
   var title=data.title;
   var heading=data.heading;
@@ -46,15 +68,11 @@ function createtemplate(data){
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/article-one',function(req, res){
-    res.send(createtemplate(articleone));
+app.get('/articlename',function(req, res){
+    var articlename=req.parans.articlename;
+    res.send(createtemplate(articles[articlename]));
 });
-app.get('/article-two',function(req, res){
-     res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-app.get('/article-three',function(req, res){
-     res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
+
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
